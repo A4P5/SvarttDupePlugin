@@ -1,0 +1,6 @@
+name: SvarttDupePlugin
+version: '1.0-SNAPSHOT'
+main: me.hatesvartt.svarttDupePlugin.SvarttDupePlugin
+api-version: '1.21'
+authors: [ hatesvartt ]
+description: Multifunction hacked client
