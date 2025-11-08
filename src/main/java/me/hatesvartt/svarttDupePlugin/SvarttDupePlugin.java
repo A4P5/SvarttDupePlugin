@@ -1,17 +1,44 @@
+// SvarttDupePlugin.java
+
 package me.hatesvartt.svarttDupePlugin;
 
+import me.hatesvartt.svarttDupePlugin.dupes.ItemFrameDupe;
+import me.hatesvartt.svarttDupePlugin.dupes.PistonDupe;
+import me.hatesvartt.svarttDupePlugin.listeners.OnItemFrameBreakListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class SvarttDupePlugin extends JavaPlugin {
+public class SvarttDupePlugin extends JavaPlugin {
+
+    private static final String RESET = "\u001B[0m";
+    private static final String PURPLE = "\u001B[35m";
+    private static SvarttDupePlugin instance;
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
+        instance = this;
 
+        saveDefaultConfig();
+        getLogger().info(PURPLE + "SvarttDupePlugin" + RESET + " initialized!");
+        getLogger().info(" ~ Developed by " + PURPLE + "Hatesvartt" + RESET + " ~");
+
+        // Initialize dupe handlers
+        ItemFrameDupe itemFrameDupe = new ItemFrameDupe(this);
+        PistonDupe pistonDupe = new PistonDupe(this);
+
+        // Register listeners
+        getServer().getPluginManager().registerEvents(pistonDupe, this); // must register to track pistons
+        getServer().getPluginManager().registerEvents(
+                new OnItemFrameBreakListener(itemFrameDupe, pistonDupe),
+                this
+        );
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        getLogger().info("SvarttDupePlugin disabled.");
+    }
+
+    public static SvarttDupePlugin getInstance() {
+        return instance;
     }
 }
