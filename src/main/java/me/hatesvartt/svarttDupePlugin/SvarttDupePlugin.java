@@ -2,6 +2,7 @@
 
 package me.hatesvartt.svarttDupePlugin;
 
+import me.hatesvartt.svarttDupePlugin.dupes.PortalDonkeyDupe;
 import me.hatesvartt.svarttDupePlugin.dupes.ItemFrameDupe;
 import me.hatesvartt.svarttDupePlugin.dupes.PistonDupe;
 import me.hatesvartt.svarttDupePlugin.listeners.OnItemFrameBreakListener;
@@ -24,9 +25,11 @@ public class SvarttDupePlugin extends JavaPlugin {
         // Initialize dupe handlers
         ItemFrameDupe itemFrameDupe = new ItemFrameDupe(this);
         PistonDupe pistonDupe = new PistonDupe(this);
+        PortalDonkeyDupe endPortalDonkeyDupe = new PortalDonkeyDupe(this);
 
         // Register listeners
-        getServer().getPluginManager().registerEvents(pistonDupe, this); // must register to track pistons
+        getServer().getPluginManager().registerEvents(pistonDupe, this);
+        getServer().getPluginManager().registerEvents(endPortalDonkeyDupe, this);
         getServer().getPluginManager().registerEvents(
                 new OnItemFrameBreakListener(itemFrameDupe, pistonDupe),
                 this
@@ -42,3 +45,4 @@ public class SvarttDupePlugin extends JavaPlugin {
         return instance;
     }
 }
+
