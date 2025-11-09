@@ -19,7 +19,9 @@ public class OnItemFrameBreakListener implements Listener {
         this.itemFrameDupe = itemFrameDupe;
     }
 
+    @EventHandler
     public void onItemFrameBreak(PlayerItemFrameChangeEvent event) {
+        if (event.getAction() != PlayerItemFrameChangeEvent.ItemFrameChangeAction.REMOVE) return;
         pistonDupe.handleItemFrameBreak(event);
         itemFrameDupe.handleItemFrameBreak(event);
     }
