@@ -1,4 +1,4 @@
-# SvarttDupePlugin Configuration!
+# SvarttDupePlugin Configuration
 
 # Enable or disable detection of players removing items from ItemFrames
 # NOTE! if itemframe-dupe and piston-dupe is enabled at same twice, it will dupe it on both instances!
@@ -12,3 +12,11 @@ itemframe-dupe:
 piston-dupe:
   enabled: false
   success_rate: 50 # int in percent! (1-100)
+
+# Dupes the content of a donkey upon death inside an end portal
+portal-donkey-dupe:
+  enabled: false
+  success_rate: 50 # int in percent! (1-100)
+  allowed-portals:
+    end_portal = true
+    nether_portal = true
