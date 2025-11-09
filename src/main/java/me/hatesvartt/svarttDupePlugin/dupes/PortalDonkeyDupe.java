@@ -64,20 +64,22 @@ public class PortalDonkeyDupe implements Listener {
 
                 // summons a fake clone of the donkey
                 Donkey fake = donkey.getWorld().spawn(donkey.getLocation(), Donkey.class);
-
-                // Copy chest state
                 fake.setCarryingChest(donkey.isCarryingChest());
-                ItemStack saddle = donkey.getInventory().getSaddle();
-                if (saddle != null) {
-                    fake.getInventory().setSaddle(saddle.clone());
-                }
-
                 fake.setCustomName(donkey.getCustomName());
                 fake.setAdult();
-
-                // kill duped instantly (with Folia scheduler to be safe)
+                
+                // Copy full inventory
+                if (donkey.isCarryingChest()) {
+                    fake.getInventory().setContents(donkey.getInventory().getContents().clone());
+                } else {
+                    ItemStack saddle = donkey.getInventory().getSaddle();
+                    if (saddle != null) fake.getInventory().setSaddle(saddle.clone());
+                }
+                
+                // Kill instantly
                 fake.getScheduler().run(plugin, task -> fake.setHealth(0), null);
             }
         }
     }
+
 }
