@@ -2,11 +2,14 @@
 
 package me.hatesvartt.svarttDupePlugin;
 
+import me.hatesvartt.svarttDupePlugin.commands.DupeCommand;
 import me.hatesvartt.svarttDupePlugin.dupes.PortalDonkeyDupe;
 import me.hatesvartt.svarttDupePlugin.dupes.ItemFrameDupe;
 import me.hatesvartt.svarttDupePlugin.dupes.PistonDupe;
 import me.hatesvartt.svarttDupePlugin.listeners.OnItemFrameBreakListener;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.Objects;
 
 public class SvarttDupePlugin extends JavaPlugin {
 
@@ -19,6 +22,13 @@ public class SvarttDupePlugin extends JavaPlugin {
         instance = this;
 
         saveDefaultConfig();
+
+        Objects.requireNonNull(getCommand("dupe")).setExecutor(new DupeCommand(this));
+
+        if (getCommand("dupe") == null) {
+            getLogger().severe("[SvarttDupePlugin] ⚠ Command 'dupe' not found!");
+        }
+
         getLogger().info(PURPLE + "SvarttDupePlugin" + RESET + " initialized!");
         getLogger().info(" ~ Developed by " + PURPLE + "Hatesvartt" + RESET + " ~");
 
